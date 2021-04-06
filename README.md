@@ -1,15 +1,10 @@
-# 👷 `worker-template` Hello World
+# Statuspage bridge
+A bridge between Statuspage.io and Discord using webhooks.
 
-A template for kick starting a Cloudflare worker project.
-
-[`index.js`](https://github.com/cloudflare/worker-template/blob/master/index.js) is the content of the Workers script.
-
-#### Wrangler
-
-To generate using [wrangler](https://github.com/cloudflare/wrangler)
-
+## Configuration
+Secrets:
 ```
-wrangler generate projectname https://github.com/cloudflare/worker-template
+WEBHOOKURL = Discord webhook url
+TOKEN = Authentication token
 ```
-
-Further documentation for Wrangler can be found [here](https://developers.cloudflare.com/workers/tooling/wrangler).
+For the token, this needs to be appended as a query parameter. So `https://url/?token=TOKEN`.

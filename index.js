@@ -2,6 +2,10 @@ addEventListener('fetch', (event) => {
 	event.respondWith(handleRequest(event.request));
 });
 
+const capitalize = (s) => {
+	if (typeof s !== 'string') return ''
+	return s.charAt(0).toUpperCase() + s.slice(1)
+}
 
 async function handleRequest(request) {
 	const body = await request.json();
@@ -9,9 +13,11 @@ async function handleRequest(request) {
 	if(searchParams.get('token') !== TOKEN) return new Response('Unauthorized', { status: 403, statusText: 'Unauthorized' });
 
 	if(body.incident) {
+		const {status, impact} = body.incident;
+
 		let color = 16711680;
-		if (body.incident.status === 'monitoring') color = 16746496;
-		if (body.incident.status === 'resolved') color = 65280;
+		if (status === 'monitoring') color = 16746496;
+		if (status === 'resolved') color = 65280;
 
 		const discordRequest = new Request(WEBHOOKURL, {
 			body: JSON.stringify({
@@ -25,12 +31,12 @@ async function handleRequest(request) {
 					fields: [
 						{
 							name: 'Status',
-							value: body.incident.status,
+							value: capitalize(status),
 							inline: true,
 						},
 						{
 							name: 'Impact',
-							value: body.incident.impact,
+							value: capitalize(impact),
 							inline: true,
 						},
 					],
