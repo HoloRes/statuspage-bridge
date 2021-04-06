@@ -1,0 +1,10 @@
+name = "statuspage-bridge"
+type = "javascript"
+account_id = "15dc54f2ec5f2f00d8e23d3876f057b9"
+workers_dev = true
+route = ""
+zone_id = ""
+
+[env.dev]
+
+[env.prod]
